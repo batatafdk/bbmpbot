@@ -8,23 +8,30 @@ const Tweet = new Twitter({
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
 })
 
-function action(event) {
-  const { retweeted_status, id_str, screen_name, is_quote_status } = event;
-  const { name } = event.user;
+function action(event){
+  const {retweeted_status, id_str, screen_name, is_quote_status} = event;
+  const {name} = event.user;
 
-  if (!retweeted_status && !is_quote_status) {
-    Tweet.post(`statuses/retweet/${id_str}`, erro => {
-      if (erro) {
-        console.log("Erro no retweet: " + erro);
-      } else {
-        console.log("RETWEETADO: ", `https://twitter.com/${name}/status/${id_str}`);
+  if(!retweeted_status && !is_quote_status){
+    Tweet.post(`statuses/retweet/${id_str}`, erro => { 
+      if(erro){
+        console.log("Erro no retweet: " + erro)
+      }else {
+        console.log("RETWEETADO: ", `https://twitter.com/${name}/status/${id_str}`)
       }
     })
-  } else {
-    return;
-  }
-};
+    Tweet.post('favorites/create', {id: id_str}, erro => {
+      if(erro){
+        return console.log("Erro no like: " + erro) 
+      }else {
+        return console.log("Tweet Likado. URL do Tweet: " + `https:twitter.com/${screen_name}/status/${id_str}`) 
+      }
+    }) 
+  }else {
+       return 
+     }
+}
 
-let stream = Tweet.stream("statuses/filter", {track: "bot"});
+var stream = Tweet.stream("statuses/filter", {track: "BBMP"});
 stream.on('data', action);
 stream.on('error', erro => console.log("Erro: "+ erro));
