@@ -20,7 +20,7 @@ function action(event){
         console.log("Retweet: ", `https://twitter.com/${name}/status/${id_str}`)
       }
     })
-    Tweet.post('favorites/create', {id: id_str}, erro => {
+    Tweet.post("favorites/create", {id: id_str}, erro => {
       if(erro){
         return console.log("Houve um erro com o like: " + erro) 
       }else {
