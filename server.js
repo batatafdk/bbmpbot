@@ -16,15 +16,11 @@ function action(event) {
     Tweet.post(`statuses/retweet/${id_str}`, erro => {
       if (erro) {
         console.log("Houve um erro com o retweet: " + erro)
-      } else {
-        console.log("Retweet: ", `https://twitter.com/${name}/status/${id_str}`)
       }
     })
     Tweet.post("favorites/create", { id: id_str }, erro => {
       if (erro) {
         return console.log("Houve um erro com o like: " + erro)
-      } else {
-        return console.log("Tweet liked. URL: " + `https:twitter.com/${screen_name}/status/${id_str}`)
       }
     })
   } else {
