@@ -8,30 +8,30 @@ const Tweet = new Twitter({
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
 })
 
-function action(event){
-  const {retweeted_status, id_str, screen_name, is_quote_status} = event;
-  const {name} = event.user;
-
-  if(!retweeted_status && !is_quote_status){
-    Tweet.post(`statuses/retweet/${id_str}`, erro => { 
-      if(erro){
+function action(event) {
+  const { retweeted_status, id_str, screen_name, is_quote_status } = event;
+  const { name } = event.user;
+  console.log(event.user)
+  if (!retweeted_status && !is_quote_status && name !== "CowinBangalore") {
+    Tweet.post(`statuses/retweet/${id_str}`, erro => {
+      if (erro) {
         console.log("Houve um erro com o retweet: " + erro)
-      }else {
+      } else {
         console.log("Retweet: ", `https://twitter.com/${name}/status/${id_str}`)
       }
     })
-    Tweet.post("favorites/create", {id: id_str}, erro => {
-      if(erro){
-        return console.log("Houve um erro com o like: " + erro) 
-      }else {
-        return console.log("Tweet liked. URL: " + `https:twitter.com/${screen_name}/status/${id_str}`) 
+    Tweet.post("favorites/create", { id: id_str }, erro => {
+      if (erro) {
+        return console.log("Houve um erro com o like: " + erro)
+      } else {
+        return console.log("Tweet liked. URL: " + `https:twitter.com/${screen_name}/status/${id_str}`)
       }
-    }) 
-  }else {
-       return 
-     }
+    })
+  } else {
+    return
+  }
 }
 
-var stream = Tweet.stream("statuses/filter", {track: "BBMP"});
+var stream = Tweet.stream("statuses/filter", { track: "BBMP"});
 stream.on("data", action);
-stream.on("error", erro => console.log("Erro: "+ erro));
+stream.on("error", erro => console.log("Erro: " + erro));
