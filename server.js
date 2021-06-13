@@ -10,7 +10,6 @@ const Tweet = new Twitter({
 
 function action(event) {
   const { retweeted_status, id_str, is_quote_status } = event;
-  console.log(event.user)
   if (!retweeted_status && !is_quote_status) {
     Tweet.post("favorites/create", { id: id_str }, erro => {
       if (erro) {
