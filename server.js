@@ -9,15 +9,8 @@ const Tweet = new Twitter({
 })
 
 function action(event) {
-  const { retweeted_status, id_str, screen_name, is_quote_status } = event;
-  const { name } = event.user;
-  console.log(event.user)
-  if (!retweeted_status && !is_quote_status && name !== "CowinBangalore") {
-    Tweet.post(`statuses/retweet/${id_str}`, erro => {
-      if (erro) {
-        console.log("Houve um erro com o retweet: " + erro)
-      }
-    })
+  const { retweeted_status, id_str, is_quote_status } = event;
+  if (!retweeted_status && !is_quote_status) {
     Tweet.post("favorites/create", { id: id_str }, erro => {
       if (erro) {
         return console.log("Houve um erro com o like: " + erro)
@@ -28,6 +21,6 @@ function action(event) {
   }
 }
 
-var stream = Tweet.stream("statuses/filter", { track: "BBMP"});
+var stream = Tweet.stream("statuses/filter", { track: "bbmp"});
 stream.on("data", action);
 stream.on("error", erro => console.log("Erro: " + erro));
