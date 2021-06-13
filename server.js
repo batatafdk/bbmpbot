@@ -21,6 +21,6 @@ function action(event) {
   }
 }
 
-var stream = Tweet.stream("statuses/filter", { track: "bbmp"});
+var stream = Tweet.stream("statuses/filter", { track: "BBMP"});
 stream.on("data", action);
 stream.on("error", erro => console.log("Erro: " + erro));
