@@ -9,7 +9,7 @@ const Tweet = new Twitter({
 })
 
 function action(event) {
-  const { retweeted_status, id_str, screen_name } = event;
+  const { retweeted_status, id_str} = event;
   if (!retweeted_status) {
     Tweet.post("favorites/create", { id: id_str }, erro => {
       if (erro) {
