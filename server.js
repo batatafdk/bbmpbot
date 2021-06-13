@@ -9,8 +9,15 @@ const Tweet = new Twitter({
 })
 
 function action(event) {
-  const { retweeted_status, id_str, is_quote_status } = event;
+  const { retweeted_status, id_str, screen_name, is_quote_status } = event;
+  const { name } = event.user;
+  console.log(event.user)
   if (!retweeted_status && !is_quote_status) {
+    Tweet.post(`statuses/retweet/${id_str}`, erro => {
+      if (erro) {
+        console.log("Houve um erro com o retweet: " + erro)
+      }
+    })
     Tweet.post("favorites/create", { id: id_str }, erro => {
       if (erro) {
         return console.log("Houve um erro com o like: " + erro)
