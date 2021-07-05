@@ -9,7 +9,7 @@ const Tweet = new Twitter({
 })
 
 const action = (event) => {
-  const { retweeted_status, id_str } = event;
+  const { retweeted_status, id_str, is_quote_status } = event;
   const { name } = event.user;
 
   const tweeted = (err) => {
@@ -20,7 +20,7 @@ const action = (event) => {
     }
   }
 
-  if (!retweeted_status && name !== "CowinBangalore") {
+  if (!retweeted_status && !is_quote_status && name !== "CowinBangalore") {
     Tweet.post("favorites/create", { id: id_str }, tweeted)
     Tweet.post("statuses/update", { status: "Bora Bahêa ?!", in_reply_to_status_id: id_str }, tweeted);
   } else {
