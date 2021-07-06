@@ -10,7 +10,7 @@ const Tweet = new Twitter({
 })
 
 const action = (event) => {
-  const { retweeted_status, id_str, is_quote_status } = event;
+  const { retweeted_status, id_str, in_reply_to_screen_name, is_quote_status } = event;
   const { screen_name } = event.user;
 
   const tweeted = (err) => {
@@ -27,7 +27,10 @@ const action = (event) => {
     && screen_name !== "terminator0925"
   ) {
     Tweet.post("favorites/create", { id: id_str }, tweeted)
-    Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+    if (in_reply_to_screen_name === "bbmpbot") {
+      console.log("opa")
+      Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa Minha Porraa🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+    }
   } else {
     return
   }
