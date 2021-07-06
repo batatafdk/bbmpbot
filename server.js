@@ -6,7 +6,7 @@ const Tweet = new Twitter({
   consumer_secret: process.env.BOT_CONSUMER_KEY_SECRET,
   access_token_key: process.env.BOT_ACCESS_TOKEN,
   access_token_secret: process.env.BOT_ACCESS_TOKEN_SECRET,
-  timeout_ms: 120 * 1000,
+  timeout_ms: 60 * 1000,
 })
 
 const action = (event) => {
