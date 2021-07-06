@@ -24,6 +24,7 @@ const action = (event) => {
   if (!retweeted_status && !is_quote_status
     && screen_name !== "CowinBangalore"
     && screen_name !== "cowinblore1844"
+    && screen_name !== "terminator0925"
   ) {
     Tweet.post("favorites/create", { id: id_str }, tweeted)
     Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
