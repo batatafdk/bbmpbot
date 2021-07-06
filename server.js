@@ -21,16 +21,33 @@ const action = (event) => {
     }
   }
 
+  const getRandomInt = (min, max) => {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min)) + min;
+  }
+
   if (!retweeted_status && !is_quote_status
     && screen_name !== "CowinBangalore"
     && screen_name !== "cowinblore1844"
     && screen_name !== "terminator0925"
   ) {
+
     Tweet.post("favorites/create", { id: id_str }, tweeted)
+
     if (in_reply_to_screen_name === "bbmpbot") {
-      console.log("opa")
-      Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa Minha Porraa🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+      const randomNumber = this.getRandomInt(1,5)
+      if (randomNumber === 1) {
+        Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa Minha P**** 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+      } else if (randomNumber === 2) {
+        Tweet.post("statuses/update", { status: `@${screen_name}  Pula sai do chão a maior do nordestão 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+      } else if (randomNumber === 3) {
+        Tweet.post("statuses/update", { status: `@${screen_name}  59 é nosso 88 também 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+      } else if (randomNumber === 4) {
+        Tweet.post("statuses/update", { status: `@${screen_name}  Bahêêa o clube do povo 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+      }
     }
+
   } else {
     return
   }
