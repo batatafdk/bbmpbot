@@ -26,7 +26,7 @@ const action = (event) => {
     && screen_name !== "cowinblore1844"
   ) {
     Tweet.post("favorites/create", { id: id_str }, tweeted)
-    Tweet.post("statuses/update", { status: `@${screen_name} BBMP 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
+    Tweet.post("statuses/update", { status: `@${screen_name}  🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
   } else {
     return
   }
