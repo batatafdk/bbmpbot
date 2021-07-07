@@ -34,8 +34,7 @@ const action = (event) => {
   ) {
 
     Tweet.post("favorites/create", { id: id_str }, tweeted)
-
-    if (in_reply_to_screen_name === "bbmpbot") {
+    if (in_reply_to_screen_name === "BbmpBot") {
       const randomNumber = this.getRandomInt(1,5)
       if (randomNumber === 1) {
         Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa Minha P**** 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
@@ -47,7 +46,6 @@ const action = (event) => {
         Tweet.post("statuses/update", { status: `@${screen_name}  Bahêêa o clube do povo 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
       }
     }
-
   } else {
     return
   }
