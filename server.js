@@ -36,7 +36,6 @@ const action = (event) => {
     Tweet.post("favorites/create", { id: id_str }, tweeted)
     if (in_reply_to_screen_name === "BbmpBot") {
       const randomNumber = getRandomInt(1,5)
-      console.log("CHEGOUUUUUUUUU")
       if (randomNumber === 1) {
         Tweet.post("statuses/update", { status: `@${screen_name}  Bora Bahêêaa Minha P**** 🔵🔴!!`, in_reply_to_status_id: id_str }, tweeted);
       } else if (randomNumber === 2) {
