@@ -34,6 +34,7 @@ const action = (event) => {
   ) {
 
     Tweet.post("favorites/create", { id: id_str }, tweeted)
+
     if (in_reply_to_screen_name === "BbmpBot") {
       const randomNumber = getRandomInt(1,5)
       if (randomNumber === 1) {

@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "dev": "node server.js",
   "dependencies": {
     "dotenv": "^10.0.0",
     "twitter": "^1.7.1"
